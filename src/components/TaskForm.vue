@@ -9,13 +9,13 @@ import { useRoute, useRouter } from 'vue-router'
 const router = useRouter()
 const route = useRoute()
 const tasksStore = useTasksStore()
-const { task } = defineProps({
+const props = defineProps({
     task: Object,
 })
 const emit = defineEmits(['submit'])
-const isEditMode = computed(() => !!task)
+const isEditMode = computed(() => !!props.task)
 
-console.log(task)
+
 
 // Реактивные данные
 const currentPath = reactive([]) // Хранит выбранный путь в иерархии
@@ -81,9 +81,9 @@ const handleCancel = () => {
 
 // Хуки
 onMounted(async () => {
-    if (task) {
-        form.title = task.title
-        form.parent_id = task.parent_id
+    if (props.task) {
+        form.title = props.task.title
+        form.parent_id = props.task.parent_id
     }
 
     if (!tasksStore.tasks.length) {
@@ -126,16 +126,11 @@ onMounted(async () => {
                     <div v-if="currentPath.length">
                         <span v-for="(item, index) in currentPath" :key="index"
                             class="flex items-center text-gray-800 text-xl">
-                            {{ item.title || 'Главная' }}
+                            {{ item.title }}
                         </span>
                     </div>
-                    <div v-else>
-                        <span class="items-center text-gray-800 text-xl">
-                            Главная
-                        </span>
-                    </div>
-                    <span>/</span>
                 </div>
+
                 <button @click="openTaskTree" class="block text-sm hover:text-[#0F3AA0] btn d-block">
                     {{ currentPath.length ? 'Изменить путь' : 'Выбрать расположение' }}
                 </button>

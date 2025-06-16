@@ -102,6 +102,6 @@ const confirmSelection = () => {
 
         <!-- Task tree -->
         <TaskTree :tasks="filteredTasks" :selected-task-id="selectedTask?.id" :search-term="searchTerm" selectable
-            @select="handleTaskSelect" />
+            :is-edit="false" @select="handleTaskSelect" />
     </div>
 </template>

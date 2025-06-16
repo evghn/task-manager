@@ -3,13 +3,18 @@ import { ref, computed } from 'vue'
 import { useTasksStore } from '@/stores/tasks'
 import { useUIStore } from '@/stores/ui'
 import Trash from '@/assets/icon/Trash.vue'
+import Pencil from '@/assets/icon/Pencil.vue'
 import router from '@/router'
 
 const props = defineProps({
     task: Object,
     level: Number,
-    searchTerm: String
-})
+    searchTerm: String,
+    isEdit: {
+        type: Boolean,
+        required: true
+    }
+});
 
 const emit = defineEmits(['task-moved', 'edit-task'])
 
@@ -17,7 +22,6 @@ const tasksStore = useTasksStore()
 const uiStore = useUIStore()
 
 // Состояние
-
 
 const dragState = ref({
     isDragging: false,
@@ -92,15 +96,17 @@ const handleDrop = async (e) => {
 </script>
 
 <template>
-    <div class="relative">
+    <div class="relative my-3">
         <!-- Task header -->
-        <div :style="{ paddingLeft: `${level * 20 + 12}px` }" draggable="true" @dragstart="handleDragStart"
-            @dragend="handleDragEnd" @dragover="handleDragOver" @dragleave="handleDragLeave" @drop="handleDrop"
-            @dblclick="handleDoubleClick" class="flex items-center py-2 px-3 cursor-pointer transition-all group"
+        <div :style="{ paddingLeft: `${level * 20 + 12}px`, marginLeft: `${level * 25}px` }" draggable="true"
+            @dragstart="handleDragStart" @dragend="handleDragEnd" @dragover="handleDragOver"
+            @dragleave="handleDragLeave" @drop="handleDrop" @dblclick="handleDoubleClick"
+            class="flex items-center py-2 px-3 cursor-pointer transition-all group border border-blue-100 rounded-[7px]"
             :class="{
                 'bg-blue-50': dragState.isDragOver,
                 'bg-yellow-100': isHighlighted,
-                'hover:bg-gray-100': !dragState.isDragOver && !isHighlighted
+                'hover:bg-gray-100': !dragState.isDragOver && !isHighlighted,
+                'bg-blue-100/20': hasChildren
             }">
             <!-- Toggle icon -->
             <span v-if="hasChildren" @click.stop="toggleExpand"
@@ -122,12 +128,13 @@ const handleDrop = async (e) => {
                 :style="{ top: level * 20 + 44 + 'px' }">
             </div>
             <!-- Actions -->
-            <div class="flex items-center space-x-2 ml-2 bg-navy group-hover:opacity-100  transition-opacity">
-                <a @click.stop="editTask" class="color-navy-500 hover:text-blue-600">
-                    <img class="fill-navy" src="/src/assets/icon/pancil.svg" alt="">
+            <div v-if="props.isEdit"
+                class="flex items-center space-x-2 ml-2 fill-navy-100 group-hover:opacity-100  transition-opacity">
+                <a @click.stop="editTask">
+                    <Pencil class="hover:text-yellow-900 fill-current text-yellow-500/40" />
                 </a>
                 <button @click.stop="deleteTask" class="text-gray-500 hover:text-red-600">
-                    <Trash class="text-red" />
+                    <Trash class="hover:text-red-800 fill-current text-red-500/40" />
                 </button>
             </div>
         </div>
@@ -135,7 +142,8 @@ const handleDrop = async (e) => {
         <!-- Children -->
         <div v-if="hasChildren && isExpanded" class="ml-2">
             <TaskItem v-for="child in children" :key="child.id" :task="child" :level="level + 1"
-                :search-term="searchTerm" @task-moved="$emit('task-moved')" @edit-task="$emit('edit-task', $event)" />
+                :search-term="searchTerm" @task-moved="$emit('task-moved')" :is-edit="props.isEdit"
+                @edit-task="$emit('edit-task', $event)" />
         </div>
     </div>
 </template>

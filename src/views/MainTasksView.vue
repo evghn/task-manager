@@ -29,7 +29,7 @@ const handleSearch = (value) => {
   <div class="mx-auto max-w-[1200px] p-4">
     <div class="bg-white rounded-lg shadow-md p-4 w-full flex items-center gap-4">
       <button @click="router.push({ name: 'new-task' })"
-        class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-5 px-4 rounded-md transition duration-200 flex items-center gap-2 whitespace-nowrap btn">
+        class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-4 px-4 rounded-md transition duration-200 flex items-center gap-2 whitespace-nowrap btn">
         Создать задачу
       </button>
       <SearchFilter @search="handleSearch" />
@@ -39,7 +39,7 @@ const handleSearch = (value) => {
       <div v-if="isLoading" class="flex justify-center items-center h-full">
         <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
       </div>
-      <TaskTree v-else :search-term="searchQuery" />
+      <TaskTree v-else :search-term="searchQuery" is-edit />
     </div>
   </div>
 </template>

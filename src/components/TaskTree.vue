@@ -8,7 +8,15 @@ const props = defineProps({
     searchTerm: {
         type: String,
         default: ''
-    }
+    },
+    selectedTaskId: {
+        type: Number,
+        default: null
+    },
+    isEdit: {
+        type: Boolean,
+        required: true
+    },
 })
 
 const emit = defineEmits(['task-moved', 'edit-task'])
@@ -65,8 +73,11 @@ const filteredTasks = computed(() => {
 <template>
     <div class="space-y-1">
         <div v-if="filteredTasks.length">
+            <div class="text-2xl  text-gray-800 mb-5 underline">
+                Список задач
+            </div>
             <TaskItem v-for="task in filteredTasks" :key="task.id" :task="task" :level="0" :search-term="searchTerm"
-                @task-moved="$emit('task-moved')" @edit-task="$emit('edit-task', $event)" />
+                :is-edit="props.isEdit" @task-moved="$emit('task-moved')" @edit-task="$emit('edit-task', $event)" />
         </div>
         <div v-else class="text-center py-10 text-gray-500">
             {{ searchTerm ? 'Задачи не найдены' : 'Нет задач для отображения' }}
