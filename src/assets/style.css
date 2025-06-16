@@ -1,0 +1,126 @@
+:root {
+  --color-bg-nav: #072a77;
+  --color-border-nav: #ffffff;
+  --color-bg: #d6dcff;
+
+  --color-bg-white-block: #f5f6ff;
+  --color-main-white: #f5f6ff;
+  --color-bg-input: #d6dcff;
+  --color-bg-is_invalid: #ffd4d0;
+
+  --color-text: #1349be;
+  --color-form-label: #2b2b2b;
+
+  --color-text-btn: #f5f6ff;
+  --color-bg-btn: #1349be;
+  --color-bg-btn-hover: #d6dcff;
+  --color-text-gray: #efefef;
+  --font-family: "Actay Light";
+  --line-height: 1.6;
+  --font-size-link: 24px;
+
+  --border-radius: 10px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  line-height: var(--line-height);
+  background-color: var(--color-bg);
+}
+
+.btn {
+  padding: 20px 40px;
+  font-size: 24px;
+  background-color: var(--color-bg-btn);
+  color: var(--color-text-btn);
+  border-radius: 5px;
+  border: 1px solid var(--color-bg-btn);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-beetween {
+  justify-content: space-between;
+}
+
+.gap-3 {
+  gap: 30px;
+}
+
+a {
+  font-size: var(--font-size-link);
+  cursor: pointer;
+}
+.link {
+  color: var(--color-bg);
+}
+
+.link:hover {
+  color: var(---color-bg-btn-hover);
+}
+
+.btn:hover {
+  background-color: var(--color-bg-btn-hover);
+  border: 1px solid var(--color-bg-btn);
+  color: var(--color-bg-btn);
+}
+/* 
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+} */
+/* 
+.search_input {
+  height: 70px;
+  color: #134abf;
+  outline: none;
+  padding: 10px;
+  background-color: #f5f6ff;
+  width: 80%;
+}
+*/
+
+.search_input::placeholder {
+  /* color: #134abf; */
+  /* Синий цвет, как у основного текста */
+  /* opacity: 1; */
+  /* Убедимся, что непрозрачность 100% */
+}
+
+.tasks_block {
+  /* width: 90%; */
+}
+
+.task_header {
+  /* justify-self: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px; */
+}
+
+.tasks_container {
+  /* height: 300px;
+  border-radius: 10px;
+  color: #134abf;
+  outline: none;
+  padding: 10px;
+  background-color: #f5f6ff;
+  width: 100%; */
+}
+
+.is-invalid {
+  /* background-color: #ffd5d1 !important;
+  border: 2px solid #960d00 !important; */
+}

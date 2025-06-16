@@ -1,0 +1,12 @@
+@import "./normalize.css";
+/* @import "./font.css"; */
+@import "./style.css";
+@import "./form.css";
+
+#app {
+  margin: 0 auto;
+  font-weight: normal;
+}
+
+@media (min-width: 1024px) {
+}

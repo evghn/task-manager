@@ -1,0 +1,31 @@
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 10px 0 20px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  font-size: 24px;
+}
+
+.error-message {
+  color: rgb(123, 9, 9);
+  font-size: 24px;
+}
+
+input {
+  padding: 17px 15px;
+  border-radius: var(--border-radius);
+  border: none;
+  background-color: var(--color-bg-input);
+  font-size: 25px;
+}
+
+.is-invalid {
+  background-color: #ffd5d1;
+  color: red;
+  border: 2px solid #960d00 !important;
+}
